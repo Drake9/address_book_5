@@ -9,7 +9,7 @@ class KsiazkaAdresowa{
 
 public:
 
-    //KsiazkaAdresowa();
+    KsiazkaAdresowa(string nazwaPlikuZUzytkownikami): uzytkownikMenedzer(nazwaPlikuZUzytkownikami){};
     void rejestracjaUzytkownika();
     void wypiszWszystkichUzytkownikow();
 };

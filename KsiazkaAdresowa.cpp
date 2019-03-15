@@ -6,8 +6,6 @@
 
 using namespace std;
 
-//konstruktor?
-
 void KsiazkaAdresowa::rejestracjaUzytkownika(){
     uzytkownikMenedzer.rejestracjaUzytkownika();
 }
