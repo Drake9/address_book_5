@@ -9,4 +9,5 @@ class MetodyPomocnicze{
 public:
     static string konwerjsaIntNaString(int liczba);
     static bool czyPlikJestPusty(fstream &plikTekstowy);
+    static char wczytajZnak();
 };

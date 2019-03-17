@@ -10,6 +10,12 @@ class KsiazkaAdresowa{
 public:
 
     KsiazkaAdresowa(string nazwaPlikuZUzytkownikami): uzytkownikMenedzer(nazwaPlikuZUzytkownikami){};
+    int zwrocIdZalogowanegoUzytkownika();
+    char wybierzOpcjeZMenuGlownego();
+    char wybierzOpcjeZMenuUzytkownika();
     void rejestracjaUzytkownika();
     void wypiszWszystkichUzytkownikow();
+    void logowanieUzytkownika();
+    void wylogowanieUzytkownika();
+    void zmianaHaslaZalogowanegoUzytkownika();
 };
