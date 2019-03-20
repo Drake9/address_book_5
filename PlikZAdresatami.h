@@ -9,7 +9,8 @@ using namespace std;
 
 class PlikZAdresatami{
 
-    const string nazwaPlikuZAdresatami;
+    int idOstatniegoAdresata, idUsunietegoAdresata;
+    const string NAZWA_PLIKU_Z_ADRESATAMI;
 
     int pobierzIdUzytkownikaZDanychOddzielonychPionowymiKreskami(string daneJednegoAdresataOddzielonePionowymiKreskami);
     Adresat pobierzDaneAdresata(string daneAdresataOddzielonePionowymiKreskami);
@@ -18,8 +19,13 @@ class PlikZAdresatami{
 
 public:
 
-    PlikZAdresatami(string NAZWAPLIKUZADRESATAMI): nazwaPlikuZAdresatami(NAZWAPLIKUZADRESATAMI){};
-    vector <Adresat> wczytajAdresatowZalogowanegoUzytkownikaZPliku(int idZalogowanegoUzytkownika, int &idOstatniegoAdresata);
-    void dopiszAdresataDoPliku(Adresat adresat);
+    PlikZAdresatami(string nazwaPlikuZAdresatami): NAZWA_PLIKU_Z_ADRESATAMI(nazwaPlikuZAdresatami){
+        idOstatniegoAdresata = 0;
+        idUsunietegoAdresata = 0;
+    };
+    int pobierzIdOstatniegoAdresata();
+    int pobierzIdUsunietegoAdresata();
+    vector <Adresat> wczytajAdresatowZalogowanegoUzytkownikaZPliku(int idZalogowanegoUzytkownika);
+    bool dopiszAdresataDoPliku(Adresat adresat);
 
 };

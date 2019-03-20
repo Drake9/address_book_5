@@ -3,13 +3,21 @@
 
 using namespace std;
 
-vector <Adresat> PlikZAdresatami::wczytajAdresatowZalogowanegoUzytkownikaZPliku(int idZalogowanegoUzytkownika, int &idOstatniegoAdresata){
+int PlikZAdresatami::pobierzIdOstatniegoAdresata(){
+    return idOstatniegoAdresata;
+}
+
+int PlikZAdresatami::pobierzIdUsunietegoAdresata(){
+    return idUsunietegoAdresata;
+}
+
+vector <Adresat> PlikZAdresatami::wczytajAdresatowZalogowanegoUzytkownikaZPliku(int idZalogowanegoUzytkownika){
     Adresat adresat;
     vector<Adresat> adresaci;
     string daneJednegoAdresataOddzielonePionowymiKreskami = "";
     string daneOstaniegoAdresataWPliku = "";
     fstream plikTekstowy;
-    plikTekstowy.open(nazwaPlikuZAdresatami.c_str(), ios::in);
+    plikTekstowy.open(NAZWA_PLIKU_Z_ADRESATAMI.c_str(), ios::in);
 
     if (plikTekstowy.good() == true)
     {
@@ -92,13 +100,13 @@ int PlikZAdresatami::pobierzIdAdresataZDanychOddzielonychPionowymiKreskami(strin
     return idAdresata;
 }
 
-void PlikZAdresatami::dopiszAdresataDoPliku(Adresat adresat){
+bool PlikZAdresatami::dopiszAdresataDoPliku(Adresat adresat){
     string liniaZDanymiAdresata = "";
     fstream plikTekstowy;
-    plikTekstowy.open(nazwaPlikuZAdresatami.c_str(), ios::out | ios::app);
+    plikTekstowy.open(NAZWA_PLIKU_Z_ADRESATAMI.c_str(), ios::out | ios::app);
 
-    if (plikTekstowy.good() == true)
-    {
+    if(plikTekstowy.good() == true){
+
         liniaZDanymiAdresata = zamienDaneAdresataNaLinieZDanymiOddzielonaPionowymiKreskami(adresat);
 
         if (MetodyPomocnicze::czyPlikJestPusty(plikTekstowy) == true)
@@ -110,12 +118,10 @@ void PlikZAdresatami::dopiszAdresataDoPliku(Adresat adresat){
             plikTekstowy << endl << liniaZDanymiAdresata ;
         }
         plikTekstowy.close();
+        idOstatniegoAdresata++;
+        return true;
     }
-    else
-    {
-        cout << "Nie udalo sie otworzyc pliku i zapisac w nim danych." << endl;
-    }
-    system("pause");
+    return false;
 }
 
 string PlikZAdresatami::zamienDaneAdresataNaLinieZDanymiOddzielonaPionowymiKreskami(Adresat adresat){

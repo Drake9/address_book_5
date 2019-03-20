@@ -16,7 +16,7 @@ int main(){
 
     while (true)
     {
-        if (ksiazkaAdresowa.zwrocIdZalogowanegoUzytkownika() == 0)
+        if (!ksiazkaAdresowa.czyUzytkownikJestZalogowany())
         {
             wybor = ksiazkaAdresowa.wybierzOpcjeZMenuGlownego();
 
@@ -39,13 +39,6 @@ int main(){
         }
         else
         {
-
-            if (ksiazkaAdresowa.czyKsiazkaJestPusta() == true)
-                // Pobieramy idOstatniegoAdresata, po to aby zoptymalizowac program.
-                // Dzieki temu, kiedy uztykwonik bedzie dodawal nowego adresata
-                // to nie bedziemy musieli jeszcze raz ustalac idOstatniegoAdresata
-                ksiazkaAdresowa.wczytajAdresatowZalogowanegoUzytkownikaZPliku();
-
             wybor = ksiazkaAdresowa.wybierzOpcjeZMenuUzytkownika();
 
             switch (wybor)

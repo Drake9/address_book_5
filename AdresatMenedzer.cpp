@@ -4,23 +4,6 @@
 
 using namespace std;
 
-bool AdresatMenedzer::czyKsiazkaJestPusta(){
-    if (adresaci.empty() == true)
-        return true;
-    else
-        return false;
-}
-
-void AdresatMenedzer::wyczyscListeAdresatow(){
-    adresaci.clear();
-    idOstatniegoAdresata = 0;
-    idUsunietegoAdresata = 0;
-}
-
-void AdresatMenedzer::wczytajAdresatowZalogowanegoUzytkownikaZPliku(int idZalogowanegoUzytkownika){
-    adresaci = plikZAdresatami.wczytajAdresatowZalogowanegoUzytkownikaZPliku(idZalogowanegoUzytkownika, idOstatniegoAdresata);
-}
-
 void AdresatMenedzer::wyswietlWszystkichAdresatow(){
     system("cls");
     if (!adresaci.empty())
@@ -50,24 +33,26 @@ void AdresatMenedzer::wyswietlDaneAdresata(Adresat adresat){
     cout << "Adres:              " << adresat.pobierzAdres() << endl;
 }
 
-void AdresatMenedzer::dodajAdresata(int idZalogowanegoUzytkownika){
+void AdresatMenedzer::dodajAdresata(){
     Adresat adresat;
 
     system("cls");
     cout << " >>> DODAWANIE NOWEGO ADRESATA <<<" << endl << endl;
-    adresat = podajDaneNowegoAdresata(idZalogowanegoUzytkownika, idOstatniegoAdresata);
+    adresat = podajDaneNowegoAdresata();
 
     adresaci.push_back(adresat);
-    plikZAdresatami.dopiszAdresataDoPliku(adresat);
-
-    idOstatniegoAdresata++;
+    if(plikZAdresatami.dopiszAdresataDoPliku(adresat))
+        cout << "Nowy adresat zostal dodany." << endl;
+    else
+        cout << "Nie udalo sie dodac nowego adresata do pliku" << endl;
+    system("pause");
 }
 
-Adresat AdresatMenedzer::podajDaneNowegoAdresata(int idZalogowanegoUzytkownika, int idOstatniegoAdresata){
+Adresat AdresatMenedzer::podajDaneNowegoAdresata(){
     Adresat adresat;
 
-    adresat.ustawId(++idOstatniegoAdresata);
-    adresat.ustawIdUzytkownika(idZalogowanegoUzytkownika);
+    adresat.ustawId(plikZAdresatami.pobierzIdOstatniegoAdresata()+1);
+    adresat.ustawIdUzytkownika(ID_ZALOGOWANEGO_UZYTKOWNIKA);
 
     cout << "Podaj imie: ";
     adresat.ustawImie(MetodyPomocnicze::wczytajLinie());
