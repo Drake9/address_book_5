@@ -6,23 +6,21 @@ using namespace std;
 
 class AdresatMenedzer{
 
+    const int ID_ZALOGOWANEGO_UZYTKOWNIKA;
     vector <Adresat> adresaci;
     PlikZAdresatami plikZAdresatami;
-    int idOstatniegoAdresata, idUsunietegoAdresata;
 
-    Adresat podajDaneNowegoAdresata(int idZalogowanegoUzytkownika, int idOstatniegoAdresata);
+    Adresat podajDaneNowegoAdresata();
+    void wyswietlDaneAdresata(Adresat adresat);
 
 public:
 
-    AdresatMenedzer(string nazwaPlikuZAdresatami): plikZAdresatami(nazwaPlikuZAdresatami){
-        idOstatniegoAdresata = 0;
-        idUsunietegoAdresata = 0;
+    AdresatMenedzer(string nazwaPlikuZAdresatami, int idZalogowanegoUzytkownika)
+        : plikZAdresatami(nazwaPlikuZAdresatami), ID_ZALOGOWANEGO_UZYTKOWNIKA(idZalogowanegoUzytkownika)
+    {
+        adresaci = plikZAdresatami.wczytajAdresatowZalogowanegoUzytkownikaZPliku(ID_ZALOGOWANEGO_UZYTKOWNIKA);
     };
 
-    bool czyKsiazkaJestPusta();
-    void wyczyscListeAdresatow();
-    void wczytajAdresatowZalogowanegoUzytkownikaZPliku(int idZalogowanegoUzytkownika);
     void wyswietlWszystkichAdresatow();
-    void wyswietlDaneAdresata(Adresat adresat);
-    void dodajAdresata(int idZalogowanegoUzytkownika);
+    void dodajAdresata();
 };

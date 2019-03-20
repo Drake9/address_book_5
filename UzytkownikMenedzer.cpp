@@ -4,7 +4,14 @@
 
 using namespace std;
 
-int UzytkownikMenedzer::zwrocIdZalogowanegoUzytkownika(){
+bool UzytkownikMenedzer::czyUzytkownikJestZalogowany(){
+    if(idZalogowanegoUzytkownika > 0)
+        return true;
+    else
+        return false;
+}
+
+int UzytkownikMenedzer::pobierzIdZalogowanegoUzytkownika(){
     return idZalogowanegoUzytkownika;
 }
 
