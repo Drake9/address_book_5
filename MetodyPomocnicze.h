@@ -18,6 +18,9 @@ public:
     static string pobierzLiczbe(string tekst, int pozycjaZnaku);
     static string zamienPierwszaLitereNaDuzaAPozostaleNaMale(string tekst);
     static string wczytajLinie();
+    static int wczytajLiczbeCalkowita();
+    static bool usunOdczytywanyPlik(string nazwaPlikuZRozszerzeniem);
+    static bool zmienNazweTymczasowegoPlikuNaNazweOdczytywanegoPliku(string nazwaTymczasowegoPlikuZRozszerzeniem, string nazwaPlikuZRozszerzeniem);
 };
 
 #endif
