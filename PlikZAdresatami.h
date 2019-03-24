@@ -30,5 +30,6 @@ public:
     vector <Adresat> wczytajAdresatowZalogowanegoUzytkownikaZPliku(int idZalogowanegoUzytkownika);
     bool dopiszAdresataDoPliku(Adresat adresat);
     bool usunAdresataZPliku(int idUsuwanegoAdresata);
+    void zaktualizujDaneEdytowanegoAdresataWPliku(Adresat adresat);
 
 };

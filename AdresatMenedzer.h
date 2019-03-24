@@ -13,6 +13,7 @@ class AdresatMenedzer{
     Adresat podajDaneNowegoAdresata();
     void wyswietlDaneAdresata(Adresat adresat);
     int podajIdWybranegoAdresata();
+    char wybierzOpcjeZMenuEdycja();
 
 public:
 
@@ -25,4 +26,5 @@ public:
     void wyswietlWszystkichAdresatow();
     void dodajAdresata();
     void usunAdresata();
+    void edytujAdresata();
 };
