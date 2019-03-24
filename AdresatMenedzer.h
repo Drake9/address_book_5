@@ -12,6 +12,7 @@ class AdresatMenedzer{
 
     Adresat podajDaneNowegoAdresata();
     void wyswietlDaneAdresata(Adresat adresat);
+    int podajIdWybranegoAdresata();
 
 public:
 
@@ -23,4 +24,5 @@ public:
 
     void wyswietlWszystkichAdresatow();
     void dodajAdresata();
+    void usunAdresata();
 };

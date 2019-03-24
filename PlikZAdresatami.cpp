@@ -7,10 +7,6 @@ int PlikZAdresatami::pobierzIdOstatniegoAdresata(){
     return idOstatniegoAdresata;
 }
 
-int PlikZAdresatami::pobierzIdUsunietegoAdresata(){
-    return idUsunietegoAdresata;
-}
-
 vector <Adresat> PlikZAdresatami::wczytajAdresatowZalogowanegoUzytkownikaZPliku(int idZalogowanegoUzytkownika){
     Adresat adresat;
     vector<Adresat> adresaci;
@@ -136,4 +132,48 @@ string PlikZAdresatami::zamienDaneAdresataNaLinieZDanymiOddzielonaPionowymiKresk
     liniaZDanymiAdresata += adresat.pobierzAdres() + '|';
 
     return liniaZDanymiAdresata;
+}
+
+bool PlikZAdresatami::usunAdresataZPliku(int idUsuwanegoAdresata){
+    fstream odczytywanyPlikTekstowy, tymczasowyPlikTekstowy;
+    string daneJednegoAdresataOddzielonePionowymiKreskami = "";
+    int numerWczytanejLinii = 1;
+    int numerUsuwanejLinii = 0;
+    int idBiezacegoAdresata = 0;
+    bool sukces = false;
+
+    odczytywanyPlikTekstowy.open(NAZWA_PLIKU_Z_ADRESATAMI.c_str(), ios::in);
+    tymczasowyPlikTekstowy.open(NAZWA_TYMCZASOWEGO_PLIKU_Z_ADRESATAMI.c_str(), ios::out | ios::app);
+
+    if (odczytywanyPlikTekstowy.good() == true && idUsuwanegoAdresata != 0)
+    {
+        while (getline(odczytywanyPlikTekstowy, daneJednegoAdresataOddzielonePionowymiKreskami)){
+
+            idBiezacegoAdresata = pobierzIdAdresataZDanychOddzielonychPionowymiKreskami(daneJednegoAdresataOddzielonePionowymiKreskami);
+
+            if(idUsuwanegoAdresata == idBiezacegoAdresata)
+                numerUsuwanejLinii = numerWczytanejLinii;
+            else if (numerWczytanejLinii == 1){
+                tymczasowyPlikTekstowy << daneJednegoAdresataOddzielonePionowymiKreskami;
+                idOstatniegoAdresata = idBiezacegoAdresata;
+            }
+            else if (numerWczytanejLinii == 2 && numerUsuwanejLinii == 1){
+                tymczasowyPlikTekstowy << daneJednegoAdresataOddzielonePionowymiKreskami;
+                idOstatniegoAdresata = idBiezacegoAdresata;
+            }
+            else{
+                tymczasowyPlikTekstowy << endl << daneJednegoAdresataOddzielonePionowymiKreskami;
+                idOstatniegoAdresata = idBiezacegoAdresata;
+            }
+
+            numerWczytanejLinii++;
+        }
+        odczytywanyPlikTekstowy.close();
+        tymczasowyPlikTekstowy.close();
+
+        if(MetodyPomocnicze::usunOdczytywanyPlik(NAZWA_PLIKU_Z_ADRESATAMI) &&
+            MetodyPomocnicze::zmienNazweTymczasowegoPlikuNaNazweOdczytywanegoPliku(NAZWA_TYMCZASOWEGO_PLIKU_Z_ADRESATAMI, NAZWA_PLIKU_Z_ADRESATAMI))
+        sukces = true;
+    }
+    return sukces;
 }
