@@ -134,6 +134,7 @@ void AdresatMenedzer::edytujAdresata(){
         if (itr -> pobierzId() == idEdytowanegoAdresata)
         {
             czyIstniejeAdresat = true;
+            wyswietlDaneAdresata(*itr);
             wybor = wybierzOpcjeZMenuEdycja();
 
             switch (wybor)
