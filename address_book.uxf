@@ -7,7 +7,7 @@
       <x>0</x>
       <y>40</y>
       <w>380</w>
-      <h>330</h>
+      <h>410</h>
     </coordinates>
     <panel_attributes>KsiazkaAdresowa
 --
@@ -28,6 +28,10 @@
 +zmianaHaslaZalogowanegoUzytkownika(): void
 +wyswietlWszystkichAdresatow(): void
 +dodajAdresata(): void
++usunAdresata(): void
++edytujAdresata(): void
++wyszukajAdresatowPoImieniu(): void
++wyszukajAdresatowPoNazwisku(): void
 
 
 </panel_attributes>
@@ -102,7 +106,7 @@
       <x>1010</x>
       <y>360</y>
       <w>440</w>
-      <h>160</h>
+      <h>230</h>
     </coordinates>
     <panel_attributes>MetodyPomocnicze
 --
@@ -112,7 +116,10 @@
 +wczytajZnak(): Char
 +pobierzLiczbe(): String
 +zamienPierwszaLitereNaDuzaAPozostaleNaMale(): String
-+wczytajLinie(): String</panel_attributes>
++wczytajLinie(): String
++wczytajLiczbeCalkowita(): Integer
++usunOdczytywanyPlik(): Boolean
++zmienNazweTymczasowegoPlikuNaNazweOdczytywanegoPliku(): Boolean</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -121,7 +128,7 @@
       <x>10</x>
       <y>550</y>
       <w>610</w>
-      <h>190</h>
+      <h>320</h>
     </coordinates>
     <panel_attributes>AdresatMenedzer
 --
@@ -129,30 +136,40 @@
 -adresaci: vector&lt;Adresat&gt;
 -plikZAdresatami: PlikZAdresatami
 --
-+AdresatMenedzer
++AdresatMenedzer()
 +wyswietlWszystkichAdresatow(): void
 +dodajAdresata(): void
++usunAdresata(): void
++edytujAdresata(): void
++wyszukajAdresatowPoImieniu(): void
++wyszukajAdresatowPoNazwisku(): void
 -podajDaneNowegoAdresata(): Adresat
--wyswietlDaneAdresata(): void</panel_attributes>
+-wyswietlDaneAdresata(): void
+-podajIdWybranegoAdresata(): Integer
+-wybierzOpcjeZMenuEdycja(): Char
+-wyswietlLiczbeWyszukanychAdresatow(): void</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>640</x>
-      <y>550</y>
+      <x>650</x>
+      <y>610</y>
       <w>610</w>
-      <h>220</h>
+      <h>290</h>
     </coordinates>
     <panel_attributes>PlikZAdresatami
 --
 -idOstatniegoAdresata: Integer
 -idUsunietegoAdresata: Integer
 -NAZWA_PLIKU_Z_ADRESATAMI: String
+-NAZWA_TYMCZASOWEGO_PLIKU_Z_ADRESATAMI: String
 --
 +PlikZAdresatami()
 +wczytajAdresatowZalogowanegoUzytkownikaZPliku(): vector&lt;Adresat&gt;
-+dopiszAdresataDoPliku(): void
++dopiszAdresataDoPliku(): Boolean
++usunAdresataZPliku(): Boolean
++zaktualizujDaneAdresataWPliku(): Boolean
 -pobierzIdUzytkownikaZDanychOddzielonychPionowymiKreskami(): Integer
 -pobierzDaneAdresata(): Adresat
 -pobierzIdAdresataZDanychOddzielonychPionowymiKreskami(): Integer
