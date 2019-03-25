@@ -178,13 +178,13 @@ bool PlikZAdresatami::usunAdresataZPliku(int idUsuwanegoAdresata){
     return sukces;
 }
 
-void PlikZAdresatami::zaktualizujDaneEdytowanegoAdresataWPliku(Adresat adresat){
+bool PlikZAdresatami::zaktualizujDaneEdytowanegoAdresataWPliku(Adresat adresat){
     string liniaZDanymiAdresata = zamienDaneAdresataNaLinieZDanymiOddzielonaPionowymiKreskami(adresat);
     int idAdresata = adresat.pobierzId(), idBiezacegoAdresata = 0;
-
     fstream odczytywanyPlikTekstowy, tymczasowyPlikTekstowy;
     string wczytanaLinia = "";
     int numerWczytanejLinii = 1;
+    bool sukces = false;
 
     odczytywanyPlikTekstowy.open(NAZWA_PLIKU_Z_ADRESATAMI.c_str(), ios::in);
     tymczasowyPlikTekstowy.open(NAZWA_TYMCZASOWEGO_PLIKU_Z_ADRESATAMI.c_str(), ios::out | ios::app);
@@ -215,7 +215,10 @@ void PlikZAdresatami::zaktualizujDaneEdytowanegoAdresataWPliku(Adresat adresat){
         tymczasowyPlikTekstowy.close();
 
         if(MetodyPomocnicze::usunOdczytywanyPlik(NAZWA_PLIKU_Z_ADRESATAMI) &&
-            MetodyPomocnicze::zmienNazweTymczasowegoPlikuNaNazweOdczytywanegoPliku(NAZWA_TYMCZASOWEGO_PLIKU_Z_ADRESATAMI, NAZWA_PLIKU_Z_ADRESATAMI))
+            MetodyPomocnicze::zmienNazweTymczasowegoPlikuNaNazweOdczytywanegoPliku(NAZWA_TYMCZASOWEGO_PLIKU_Z_ADRESATAMI, NAZWA_PLIKU_Z_ADRESATAMI)){
             cout << endl << "Dane zostaly zaktualizowane." << endl << endl;
+            sukces = true;
+        }
     }
+    return sukces;
 }
